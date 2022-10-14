@@ -2,11 +2,26 @@ import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import BlueButton from './BlueButton';
 import { reset } from '../store/modules/mbti';
+import { useEffect } from 'react';
 
 export default function Show() {
   const result = useSelector((state) => state.mbti.mbtiResult);
   const explaination = useSelector((state) => state.mbti.explaination[result]);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    async function sendData() {
+      const resInc = await fetch('http://localhost:3001/data/inccount', {
+        method: 'POST',
+      });
+      if (resInc.status === 200) {
+        console.log(await resInc.json());
+      } else {
+        throw new Error('통신 이상');
+      }
+    }
+    sendData();
+  }, []);
 
   return (
     <>
@@ -39,19 +54,7 @@ const Result = styled.p`
 `;
 const Additional = styled.p`
   font-size: 2em;
-  // color: #ffc107;
-  background-image: linear-gradient(
-    90deg,
-    red,
-    orange,
-    yellow,
-    green,
-    blue,
-    navy,
-    purple
-  );
-  -webkit-background-clip: text;
-  color: transparent;
+  color: #ffc107;
   margin: 0.5em 0 0.5em 0;
   transform: translateY(-20px);
 `;
