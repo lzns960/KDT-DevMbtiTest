@@ -4,16 +4,6 @@ import { check, next } from '../store/modules/mbti';
 import BlueButton from './BlueButton';
 import Progress from './Progoress';
 
-const SurveyQuestion = styled.p`
-  font-size: 1.5em;
-  color: #777;
-`;
-
-const Vs = styled.p`
-  font-size: 2em;
-  padding-top: 1em;
-`;
-
 export default function Mbti() {
   const survey = useSelector((state) => state.mbti.survey);
   const page = useSelector((state) => state.mbti.page);
@@ -42,3 +32,13 @@ export default function Mbti() {
     </>
   );
 }
+
+const SurveyQuestion = styled.p`
+  font-size: 1.5em;
+  color: #777;
+`;
+
+const Vs = styled.p`
+  font-size: 2em;
+  padding-top: 1em;
+`;

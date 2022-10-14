@@ -14,7 +14,7 @@ export default function Progress({ page, maxPage }) {
 }
 
 const MyProgress = styled.div`
-  margin-top: 3em;
+  margin-top: 5em;
 `;
 const Fill = styled.div`
   width: 100%;

@@ -9,7 +9,7 @@ const Main = styled.main`
   box-sizing: border-box;
   width: 100%;
   max-width: 500px;
-  padding: 0 35px;
+  padding: 0 25px;
   margin: auto;
   text-align: center;
 `;

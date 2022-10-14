@@ -8,7 +8,7 @@ const MyButton = styled.a`
   text-decoration: none;
   line-height: 1.6em;
   font-size: 1.2em;
-  padding: 0.5em 1.6em;
+  padding: 0.5em 1em;
   color: ${(props) => props.textColor};
   background-color: ${(props) => props.mainColor};
   border: 2px solid ${(props) => props.subColor};
@@ -17,6 +17,7 @@ const MyButton = styled.a`
   transition: transform 0.15s ease-out;
   transform-style: preserve-3d;
   margin-top: 1em;
+  width: 400px;
 
   /*&::before {
     content: '';

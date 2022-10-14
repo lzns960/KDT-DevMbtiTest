@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { reset } from '../store/modules/mbti';
 import BlueButton from './BlueButton';
+import { reset } from '../store/modules/mbti';
 
 export default function Show() {
   const result = useSelector((state) => state.mbti.mbtiResult);
@@ -24,6 +24,7 @@ export default function Show() {
 
 const Header = styled.p`
   font-size: 3em;
+  margin: 0;
 `;
 const Explaination = styled.p`
   font-size: 1.5em;
@@ -34,19 +35,35 @@ const Result = styled.p`
   font-weight: bold;
   color: #0b5ed7;
   text-shadow: 2px 4px #d9dddc;
+  margin: 1em 0 0.5em 0;
 `;
 const Additional = styled.p`
   font-size: 2em;
-  color: #ffc107;
+  // color: #ffc107;
+  background-image: linear-gradient(
+    90deg,
+    red,
+    orange,
+    yellow,
+    green,
+    blue,
+    navy,
+    purple
+  );
+  -webkit-background-clip: text;
+  color: transparent;
+  margin: 0.5em 0 0.5em 0;
+  transform: translateY(-20px);
 `;
 const AdditionalImg = styled.img`
   width: 300px;
-  transform: translateX(10px) translateY(-40px);
+  transform: translateX(10px) translateY(-20px);
 `;
 const AdditionalEmoji = styled.p`
   font-size: 2em;
+  margin: 0;
 `;
 const AdditionalSubText = styled.p`
-  font-size: 2em;
+  font-size: 1.5em;
   color: #444;
 `;

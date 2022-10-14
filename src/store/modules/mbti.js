@@ -89,7 +89,7 @@ const initState = {
     },
     ESFJ: {
       text: '개발팀의 분위기 메이커이자 아이디어 뱅크가 될 당신의 MBTI 는!',
-      img: '/images/esfj.webp',
+      img: '/images/esfj.png',
       emoji: '👑 + 📑 + 👼',
       subText: '감투쓰기, 계획 세우기, 남 도와주기를 좋아함',
     },
@@ -155,7 +155,7 @@ const initState = {
     },
     INFP: {
       text: '개발팀의 그 어떤 트러블도 당신 앞에서는 사르르 녹을뿐, 팀의 근간을 다져주는 당신의 MBTI 는!',
-      img: '/images/infp.webp',
+      img: '/images/infp.png',
       emoji: '💖 + 🎠 + 🖤',
       subText: '동화같이 아기자기한 마음 하지만 깊은 곳엔 우울함',
     },
