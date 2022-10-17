@@ -6,12 +6,12 @@ import { useEffect } from 'react';
 
 export default function Show() {
   const result = useSelector((state) => state.mbti.mbtiResult);
-  const explaination = useSelector((state) => state.mbti.explaination[result]);
+  const explanation = useSelector((state) => state.mbti.explanation[result]);
   const dispatch = useDispatch();
 
   useEffect(() => {
     async function sendData() {
-      const resInc = await fetch('http://localhost:3001/data/inccount', {
+      const resInc = await fetch('http://localhost:3001/mongo/inccount', {
         method: 'POST',
       });
       if (resInc.status === 200) {
@@ -26,12 +26,12 @@ export default function Show() {
   return (
     <>
       <Header>당신의 개발자 MBTI 결과는?</Header>
-      <Explaination>{explaination.text}</Explaination>
+      <Explanation>{explanation.text}</Explanation>
       <Result>{result}</Result>
-      <AdditionalImg src={explaination.img} alt="memoji" />
+      <AdditionalImg src={explanation.img} alt="memoji" />
       <Additional>재미로 보는 이모지 MBTI 해석</Additional>
-      <AdditionalEmoji>{explaination.emoji}</AdditionalEmoji>
-      <AdditionalSubText>{explaination.subText}</AdditionalSubText>
+      <AdditionalEmoji>{explanation.emoji}</AdditionalEmoji>
+      <AdditionalSubText>{explanation.subText}</AdditionalSubText>
       <BlueButton text="다시 검사하기" clickEvent={() => dispatch(reset())} />
     </>
   );
@@ -41,7 +41,7 @@ const Header = styled.p`
   font-size: 3em;
   margin: 0;
 `;
-const Explaination = styled.p`
+const Explanation = styled.p`
   font-size: 1.5em;
   color: #777;
 `;

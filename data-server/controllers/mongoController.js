@@ -1,8 +1,11 @@
-/* 초기 상태 설정 
+const mongoClient = require('../mongoConnect');
+const _client = mongoClient.connect();
+
+/* 초기 상태 설정 */
 const initState = {
   mbtiResult: '',
   page: 0, // 0: 인트로 페이지, 1 ~ n: 선택 페이지, n+1: 결과 페이지
-  // 질문 목록 
+  // 질문 목록
   survey: [
     {
       question:
@@ -61,7 +64,7 @@ const initState = {
       ],
     },
   ],
-  //결과에 대한 설명 
+  //결과에 대한 설명
   explanation: {
     ESTJ: {
       text: '무리한 개발 일정만 아니라면 일정을 철저하게 지킬 당신의 MBTI 는!',
@@ -161,75 +164,41 @@ const initState = {
     },
   },
 };
-*/
-/* 빈 값 전달 */
-const initStateEmpty = {
-  mbtiResult: '',
-  page: 0,
-  survey: [],
-  explanation: {},
+
+const mongoDB = {
+  setData: async () => {
+    const client = await _client;
+    const db = client.db('mbti').collection('data');
+    const result = await db.insertOne(initState);
+    if (result.acknowledged) {
+      return '업데이트 성공';
+    } else {
+      throw new Error('통신이상');
+    }
+  },
+
+  getCounts: async () => {
+    const client = await _client;
+    const db = client.db('mbti').collection('counts');
+    const data = await db.find({}).toArray();
+    return data;
+  },
+  incCounts: async () => {
+    const client = await _client;
+    const db = client.db('mbti').collection('counts');
+    const result = await db.updateOne({ id: 1 }, { $inc: { counts: +1 } });
+    if (result.acknowledged) {
+      return '업데이트 성공';
+    } else {
+      throw new Error('통신이상');
+    }
+  },
+  getData: async () => {
+    const client = await _client;
+    const db = client.db('mbti').collection('data');
+    const data = await db.find({}).toArray();
+    return data;
+  },
 };
-/* 액션 type 설정 */
-const INIT = 'mbti/INIT';
-const NEXT = 'mbti/NEXT';
-const CHECK = 'mbti/CHECK';
-const RESET = 'mbti/RESET';
 
-/* 액션 생성 함수 */
-// payload -> 선택에 다른 결과 값 result 전달 필요
-
-export function init(data) {
-  // 데이터 전달
-  return {
-    type: INIT,
-    payload: data,
-  };
-}
-export function next() {
-  return {
-    type: NEXT,
-  };
-}
-
-export function check(result) {
-  return {
-    type: CHECK,
-    payload: { result },
-  };
-}
-
-export function reset() {
-  return {
-    type: RESET,
-  };
-}
-
-/* Reducer */
-export default function mbti(state = initStateEmpty, action) {
-  switch (action.type) {
-    case INIT:
-      return {
-        ...state,
-        survey: action.payload.survey,
-        explanation: action.payload.explanation,
-      };
-    case CHECK:
-      return {
-        ...state,
-        mbtiResult: state.mbtiResult + action.payload.result,
-      };
-    case NEXT:
-      return {
-        ...state,
-        page: state.page + 1,
-      };
-    case RESET:
-      return {
-        ...state,
-        page: 0,
-        mbtiResult: '',
-      };
-    default:
-      return state;
-  }
-}
+module.exports = mongoDB;

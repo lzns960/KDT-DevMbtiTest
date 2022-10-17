@@ -18,4 +18,17 @@ router.post('/inccount', (req, res) => {
   });
 });
 
+router.get('/survey', (rea, res) => {
+  db.getSurvey((data) => {
+    console.log(data);
+    res.send(data);
+  });
+});
+
+router.get('/explanation', (rea, res) => {
+  db.getExplanation((data) => {
+    console.log(data);
+    res.send(data);
+  });
+});
 module.exports = router;

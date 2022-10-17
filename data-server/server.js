@@ -10,9 +10,11 @@ app.use(cors());
 
 /* 라우팅 */
 const dataRouter = require('./routes/data');
+const mongoRouter = require('./routes/mongo');
 
 /* 모듈 설정 */
 app.use('/data', dataRouter); // 주소 값 /data면 dataRouter 모듈이 처리한다.
+app.use('/mongo', mongoRouter);
 
 app.listen(PORT, () => {
   console.log(`데이터 통신 서버가 ${PORT}에서 작동 중`);

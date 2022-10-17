@@ -20,5 +20,21 @@ const db = {
       }
     );
   },
+  getSurvey: (cb) => {
+    connection.query(
+      'SELECT * FROM mydb.question q LEFT JOIN mydb.answer a ON q.ID_PK=a.QUESTION_ID_FK',
+      (err, data) => {
+        // 쿼리문에 의한 결과가 err면 err, 정상작동시 data에 담김
+        if (err) throw err;
+        cb(data);
+      }
+    );
+  },
+  getExplanation: (cb) => {
+    connection.query('SELECT * FROM mydb.explanation;', (err, data) => {
+      if (err) throw err;
+      cb(data);
+    });
+  },
 };
 module.exports = db;
